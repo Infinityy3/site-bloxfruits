@@ -25,23 +25,13 @@ header h1 {
   margin: 0;
 }
 
-.login-box {
-  display: flex;
-  gap: 5px;
-}
-
-.login-box input {
-  padding: 6px;
-  border-radius: 6px;
-  border: none;
-}
-
-.login-box button {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: none;
+.admin-btn {
+  padding: 8px 14px;
+  background: #020617;
+  color: #e5e7eb;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
   cursor: pointer;
-  background: #22c55e;
   font-weight: bold;
 }
 
@@ -76,7 +66,7 @@ button {
 
 .delete {
   background: #ef4444;
-  color: white;
+  color: #fff;
   margin-top: 8px;
 }
 
@@ -104,13 +94,7 @@ input, textarea {
 
 <header>
   <h1>🔥 Infinity Blox Fruits</h1>
-
-  <!-- LOGIN TOPO DIREITO -->
-  <div class="login-box">
-    <input id="loginEmail" placeholder="Email">
-    <input id="loginPass" type="password" placeholder="Senha">
-    <button onclick="loginAdmin()">Entrar</button>
-  </div>
+  <button class="admin-btn" onclick="openAdmin()">Área Admin</button>
 </header>
 
 <div class="container">
@@ -157,14 +141,14 @@ Comprar no WhatsApp
 </div>
 
 <script>
-const ADMIN_EMAIL = "SEUEMAIL@gmail.com";   // MUDE AQUI
-const ADMIN_PASS  = "SUASENHA";             // MUDE AQUI
+const ADMIN_EMAIL = "SEUEMAIL@gmail.com"; // MUDE
+const ADMIN_PASS  = "SUASENHA";           // MUDE
 
 let isAdmin = false;
 
-function loginAdmin() {
-  const email = loginEmail.value;
-  const pass = loginPass.value;
+function openAdmin() {
+  const email = prompt("Digite o email de administrador:");
+  const pass = prompt("Digite a senha:");
 
   if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
     isAdmin = true;
@@ -173,9 +157,9 @@ function loginAdmin() {
     p2.value = price2.innerText;
     p3.value = price3.innerText;
     loadReviews();
-    alert("Login admin realizado!");
+    alert("Acesso liberado!");
   } else {
-    alert("Email ou senha incorretos");
+    alert("Email ou senha incorretos.");
   }
 }
 
