@@ -7,33 +7,64 @@
 
 <style>
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
   background: #0f172a;
   color: #e5e7eb;
-  margin: 0;
 }
+
 header {
   background: linear-gradient(90deg,#7c3aed,#2563eb);
-  padding: 30px;
-  text-align: center;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
+header h1 {
+  margin: 0;
+}
+
+.login-box {
+  display: flex;
+  gap: 5px;
+}
+
+.login-box input {
+  padding: 6px;
+  border-radius: 6px;
+  border: none;
+}
+
+.login-box button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #22c55e;
+  font-weight: bold;
+}
+
 .container {
   max-width: 1000px;
   margin: auto;
   padding: 20px;
 }
+
 .card {
   background: #020617;
   padding: 20px;
   border-radius: 12px;
-  margin-bottom: 20px;
   border: 1px solid #1e293b;
+  margin-bottom: 20px;
 }
+
 .price {
   color: #22c55e;
   font-size: 22px;
   font-weight: bold;
 }
+
 button {
   padding: 10px;
   border: none;
@@ -42,21 +73,25 @@ button {
   font-weight: bold;
   cursor: pointer;
 }
+
 .delete {
   background: #ef4444;
-  color: #fff;
+  color: white;
   margin-top: 8px;
 }
+
 input, textarea {
   width: 100%;
   padding: 10px;
-  margin-top: 10px;
   border-radius: 6px;
   border: none;
+  margin-top: 10px;
 }
+
 .admin {
   display: none;
 }
+
 .review {
   border-top: 1px solid #1e293b;
   padding-top: 10px;
@@ -68,8 +103,14 @@ input, textarea {
 <body>
 
 <header>
-<h1>🔥 Infinity Blox Fruits</h1>
-<p>Contas upadas com preço justo</p>
+  <h1>🔥 Infinity Blox Fruits</h1>
+
+  <!-- LOGIN TOPO DIREITO -->
+  <div class="login-box">
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPass" type="password" placeholder="Senha">
+    <button onclick="loginAdmin()">Entrar</button>
+  </div>
 </header>
 
 <div class="container">
@@ -83,7 +124,7 @@ input, textarea {
 <p>Conta Avançada</p>
 <div class="price" id="price2">R$ 20,00</div>
 
-<p>Conta MAX (2550)</p>
+<p>Conta MAX Level (2550)</p>
 <div class="price" id="price3">R$ 25,00</div>
 
 <br>
@@ -102,38 +143,39 @@ Comprar no WhatsApp
 <div id="reviews"></div>
 </div>
 
-<div class="card">
-<h2>🔐 Login Admin</h2>
-<input id="loginEmail" placeholder="Seu email">
-<button onclick="loginAdmin()">Entrar</button>
+<!-- PAINEL ADMIN -->
+<div class="card admin" id="adminPanel">
+<h2>🔧 Painel Administrativo</h2>
 
-<div class="admin" id="adminPanel">
-<h3>✏️ Editar Preços</h3>
+<p>Editar preços:</p>
 <input id="p1">
 <input id="p2">
 <input id="p3">
-<button onclick="savePrices()">Salvar</button>
-</div>
+<button onclick="savePrices()">Salvar Preços</button>
 </div>
 
 </div>
 
 <script>
-const ADMIN_EMAIL = "gabrielbrandini457@gmail.com"; // <-- TROCA PELO SEU
+const ADMIN_EMAIL = "SEUEMAIL@gmail.com";   // MUDE AQUI
+const ADMIN_PASS  = "SUASENHA";             // MUDE AQUI
 
 let isAdmin = false;
 
 function loginAdmin() {
-  const email = document.getElementById("loginEmail").value;
-  if (email === ADMIN_EMAIL) {
+  const email = loginEmail.value;
+  const pass = loginPass.value;
+
+  if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
     isAdmin = true;
-    document.getElementById("adminPanel").style.display = "block";
+    adminPanel.style.display = "block";
+    p1.value = price1.innerText;
+    p2.value = price2.innerText;
+    p3.value = price3.innerText;
     loadReviews();
-    document.getElementById("p1").value = price1.innerText;
-    document.getElementById("p2").value = price2.innerText;
-    document.getElementById("p3").value = price3.innerText;
+    alert("Login admin realizado!");
   } else {
-    alert("Email não autorizado");
+    alert("Email ou senha incorretos");
   }
 }
 
@@ -141,7 +183,7 @@ function savePrices() {
   price1.innerText = p1.value;
   price2.innerText = p2.value;
   price3.innerText = p3.value;
-  alert("Preços atualizados");
+  alert("Preços atualizados!");
 }
 
 function addReview() {
