@@ -1,174 +1,188 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Infinity Blox Fruits</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #fff;
-      margin: 0;
-    }
-    header {
-      background: #020617;
-      padding: 20px;
-      text-align: center;
-    }
-    section {
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    .card {
-      background: #020617;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-    .price {
-      font-size: 22px;
-      color: #22c55e;
-      font-weight: bold;
-    }
-    button, input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 5px;
-      border: none;
-    }
-    button {
-      background: #22c55e;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .delete {
-      background: #ef4444;
-    }
-    .admin {
-      display: none;
-      margin-top: 15px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Infinity Blox Fruits</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: #e5e7eb;
+  margin: 0;
+}
+header {
+  background: linear-gradient(90deg,#7c3aed,#2563eb);
+  padding: 30px;
+  text-align: center;
+}
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+.card {
+  background: #020617;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #1e293b;
+}
+.price {
+  color: #22c55e;
+  font-size: 22px;
+  font-weight: bold;
+}
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #22c55e;
+  font-weight: bold;
+  cursor: pointer;
+}
+.delete {
+  background: #ef4444;
+  color: #fff;
+  margin-top: 8px;
+}
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: none;
+}
+.admin {
+  display: none;
+}
+.review {
+  border-top: 1px solid #1e293b;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+</style>
 </head>
+
 <body>
 
 <header>
-  <h1>🔥 Infinity Blox Fruits</h1>
-  <p>Venda de contas upadas com segurança e preço justo</p>
+<h1>🔥 Infinity Blox Fruits</h1>
+<p>Contas upadas com preço justo</p>
 </header>
 
-<section>
-  <div class="card">
-    <h2>📌 Sobre</h2>
-    <p id="aboutText">
-      Aqui você encontra contas de Blox Fruits já upadas, ideais pra quem quer jogar sem perder tempo.
-    </p>
-  </div>
+<div class="container">
 
-  <div class="card">
-    <h2>💎 Contas Disponíveis</h2>
+<div class="card">
+<h2>💎 Contas</h2>
 
-    <p><b>Conta Iniciante</b></p>
-    <div class="price" id="price1">R$ 15,00</div>
+<p>Conta Iniciante</p>
+<div class="price" id="price1">R$ 15,00</div>
 
-    <hr>
+<p>Conta Avançada</p>
+<div class="price" id="price2">R$ 20,00</div>
 
-    <p><b>Conta Avançada</b></p>
-    <div class="price" id="price2">R$ 20,00</div>
+<p>Conta MAX (2550)</p>
+<div class="price" id="price3">R$ 25,00</div>
 
-    <hr>
+<br>
+<button onclick="window.open('https://wa.me/5524998647157')">
+Comprar no WhatsApp
+</button>
+</div>
 
-    <p><b>Conta MAX (Level 2550)</b></p>
-    <div class="price" id="price3">R$ 25,00</div>
-  </div>
+<div class="card">
+<h2>⭐ Avaliações</h2>
 
-  <button onclick="window.open('https://wa.me/5524998647157')">
-    📲 Comprar pelo WhatsApp
-  </button>
-</section>
+<input id="email" placeholder="Seu email">
+<textarea id="comment" placeholder="Seu comentário"></textarea>
+<button onclick="addReview()">Enviar Avaliação</button>
 
-<section>
-  <div class="card">
-    <h2>⭐ Avaliações</h2>
-    <input id="name" placeholder="Seu nome">
-    <textarea id="comment" placeholder="Seu comentário"></textarea>
-    <button onclick="addComment()">Enviar Avaliação</button>
-    <div id="comments"></div>
-  </div>
-</section>
+<div id="reviews"></div>
+</div>
 
-<section>
-  <div class="card">
-    <h2>🔒 Área Administrativa</h2>
-    <input type="password" id="adminPass" placeholder="Senha de admin">
-    <button onclick="loginAdmin()">Entrar</button>
+<div class="card">
+<h2>🔐 Login Admin</h2>
+<input id="loginEmail" placeholder="Seu email">
+<button onclick="loginAdmin()">Entrar</button>
 
-    <div class="admin" id="adminPanel">
-      <h3>✏️ Editar Texto</h3>
-      <textarea id="editAbout"></textarea>
-      <button onclick="saveAbout()">Salvar Texto</button>
+<div class="admin" id="adminPanel">
+<h3>✏️ Editar Preços</h3>
+<input id="p1">
+<input id="p2">
+<input id="p3">
+<button onclick="savePrices()">Salvar</button>
+</div>
+</div>
 
-      <h3>💰 Editar Preços</h3>
-      <input id="editPrice1" placeholder="Preço Conta Iniciante">
-      <input id="editPrice2" placeholder="Preço Conta Avançada">
-      <input id="editPrice3" placeholder="Preço Conta MAX">
-      <button onclick="savePrices()">Salvar Preços</button>
-    </div>
-  </div>
-</section>
+</div>
 
 <script>
-  function addComment() {
-    const name = document.getElementById('name').value;
-    const text = document.getElementById('comment').value;
-    if (!name || !text) return;
+const ADMIN_EMAIL = "gabrielbrandini457@gmail.com"; // <-- TROCA PELO SEU
 
-    const div = document.createElement('div');
-    div.className = 'card';
-    div.innerHTML = `<b>${name}</b><p>${text}</p>
-      <button class="delete" onclick="this.parentElement.remove()">Apagar</button>`;
-    document.getElementById('comments').appendChild(div);
+let isAdmin = false;
 
-    document.getElementById('name').value = '';
-    document.getElementById('comment').value = '';
+function loginAdmin() {
+  const email = document.getElementById("loginEmail").value;
+  if (email === ADMIN_EMAIL) {
+    isAdmin = true;
+    document.getElementById("adminPanel").style.display = "block";
+    loadReviews();
+    document.getElementById("p1").value = price1.innerText;
+    document.getElementById("p2").value = price2.innerText;
+    document.getElementById("p3").value = price3.innerText;
+  } else {
+    alert("Email não autorizado");
   }
+}
 
-  function loginAdmin() {
-    if (document.getElementById('adminPass').value === '@@24loveyou@@') {
-      document.getElementById('adminPanel').style.display = 'block';
+function savePrices() {
+  price1.innerText = p1.value;
+  price2.innerText = p2.value;
+  price3.innerText = p3.value;
+  alert("Preços atualizados");
+}
 
-      document.getElementById('editAbout').value =
-        document.getElementById('aboutText').innerText;
+function addReview() {
+  const email = document.getElementById("email").value;
+  const comment = document.getElementById("comment").value;
+  if (!email || !comment) return;
 
-      document.getElementById('editPrice1').value =
-        document.getElementById('price1').innerText;
-      document.getElementById('editPrice2').value =
-        document.getElementById('price2').innerText;
-      document.getElementById('editPrice3').value =
-        document.getElementById('price3').innerText;
-    } else {
-      alert('Senha incorreta');
-    }
-  }
+  const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+  reviews.push({ email, comment });
+  localStorage.setItem("reviews", JSON.stringify(reviews));
 
-  function saveAbout() {
-    document.getElementById('aboutText').innerText =
-      document.getElementById('editAbout').value;
-    alert('Texto atualizado!');
-  }
+  document.getElementById("email").value = "";
+  document.getElementById("comment").value = "";
+  loadReviews();
+}
 
-  function savePrices() {
-    document.getElementById('price1').innerText =
-      document.getElementById('editPrice1').value;
-    document.getElementById('price2').innerText =
-      document.getElementById('editPrice2').value;
-    document.getElementById('price3').innerText =
-      document.getElementById('editPrice3').value;
-    alert('Preços atualizados!');
-  }
+function loadReviews() {
+  const reviewsDiv = document.getElementById("reviews");
+  reviewsDiv.innerHTML = "";
+  const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+  reviews.forEach((r, i) => {
+    const div = document.createElement("div");
+    div.className = "review";
+    div.innerHTML = `
+      <b>${r.email}</b><br>
+      ${r.comment}
+      ${isAdmin ? `<br><button class="delete" onclick="deleteReview(${i})">Apagar</button>` : ""}
+    `;
+    reviewsDiv.appendChild(div);
+  });
+}
+
+function deleteReview(i) {
+  const reviews = JSON.parse(localStorage.getItem("reviews"));
+  reviews.splice(i, 1);
+  localStorage.setItem("reviews", JSON.stringify(reviews));
+  loadReviews();
+}
+
+loadReviews();
 </script>
 
 </body>
