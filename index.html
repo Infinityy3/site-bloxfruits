@@ -21,9 +21,7 @@ header {
   align-items: center;
 }
 
-header h1 {
-  margin: 0;
-}
+header h1 { margin: 0; }
 
 .admin-btn {
   padding: 8px 14px;
@@ -36,7 +34,7 @@ header h1 {
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: auto;
   padding: 20px;
 }
@@ -51,8 +49,9 @@ header h1 {
 
 .price {
   color: #22c55e;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
+  margin: 10px 0;
 }
 
 button {
@@ -75,11 +74,13 @@ input, textarea {
   padding: 10px;
   border-radius: 6px;
   border: none;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
-.admin {
-  display: none;
+.admin { display: none; }
+
+.product {
+  margin-bottom: 15px;
 }
 
 .review {
@@ -99,43 +100,39 @@ input, textarea {
 
 <div class="container">
 
+<!-- PRODUTOS -->
 <div class="card">
-<h2>💎 Contas</h2>
+  <h2>💎 Contas Disponíveis</h2>
+  <div id="products"></div>
 
-<p>Conta Iniciante</p>
-<div class="price" id="price1">R$ 15,00</div>
-
-<p>Conta Avançada</p>
-<div class="price" id="price2">R$ 20,00</div>
-
-<p>Conta MAX Level (2550)</p>
-<div class="price" id="price3">R$ 25,00</div>
-
-<br>
-<button onclick="window.open('https://wa.me/5524998647157')">
-Comprar no WhatsApp
-</button>
+  <button onclick="window.open('https://wa.me/5524998647157')">
+    Comprar no WhatsApp
+  </button>
 </div>
 
+<!-- AVALIAÇÕES -->
 <div class="card">
-<h2>⭐ Avaliações</h2>
+  <h2>⭐ Avaliações</h2>
 
-<input id="email" placeholder="Seu email">
-<textarea id="comment" placeholder="Seu comentário"></textarea>
-<button onclick="addReview()">Enviar Avaliação</button>
+  <input id="email" placeholder="Seu email">
+  <textarea id="comment" placeholder="Seu comentário"></textarea>
+  <button onclick="addReview()">Enviar Avaliação</button>
 
-<div id="reviews"></div>
+  <div id="reviews"></div>
 </div>
 
 <!-- PAINEL ADMIN -->
 <div class="card admin" id="adminPanel">
-<h2>🔧 Painel Administrativo</h2>
+  <h2>🔧 Painel Administrativo</h2>
 
-<p>Editar preços:</p>
-<input id="p1">
-<input id="p2">
-<input id="p3">
-<button onclick="savePrices()">Salvar Preços</button>
+  <h3>➕ Adicionar nova conta</h3>
+  <input id="newName" placeholder="Nome da conta">
+  <textarea id="newDesc" placeholder="Descrição da conta"></textarea>
+  <input id="newPrice" placeholder="Preço (ex: R$ 30,00)">
+  <button onclick="addProduct()">Adicionar Conta</button>
+
+  <h3 style="margin-top:20px;">✏️ Editar / Remover contas</h3>
+  <div id="adminProducts"></div>
 </div>
 
 </div>
@@ -146,6 +143,7 @@ const ADMIN_PASS  = "SUASENHA";           // MUDE
 
 let isAdmin = false;
 
+/* ===== LOGIN ADMIN ===== */
 function openAdmin() {
   const email = prompt("Digite o email de administrador:");
   const pass = prompt("Digite a senha:");
@@ -153,23 +151,97 @@ function openAdmin() {
   if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
     isAdmin = true;
     adminPanel.style.display = "block";
-    p1.value = price1.innerText;
-    p2.value = price2.innerText;
-    p3.value = price3.innerText;
+    loadProducts();
     loadReviews();
     alert("Acesso liberado!");
   } else {
-    alert("Email ou senha incorretos.");
+    alert("Dados incorretos.");
   }
 }
 
-function savePrices() {
-  price1.innerText = p1.value;
-  price2.innerText = p2.value;
-  price3.innerText = p3.value;
-  alert("Preços atualizados!");
+/* ===== PRODUTOS ===== */
+function getProducts() {
+  return JSON.parse(localStorage.getItem("products")) || [
+    { name: "Conta Iniciante", desc: "Boa para começar", price: "R$ 15,00" },
+    { name: "Conta Avançada", desc: "Level alto + progresso", price: "R$ 20,00" },
+    { name: "Conta MAX Level", desc: "Level 2550 • Endgame", price: "R$ 25,00" }
+  ];
 }
 
+function saveProducts(products) {
+  localStorage.setItem("products", JSON.stringify(products));
+}
+
+function loadProducts() {
+  const products = getProducts();
+  const div = document.getElementById("products");
+  const adminDiv = document.getElementById("adminProducts");
+
+  div.innerHTML = "";
+  adminDiv.innerHTML = "";
+
+  products.forEach((p, i) => {
+    // VISITANTE
+    const box = document.createElement("div");
+    box.className = "product";
+    box.innerHTML = `
+      <h3>${p.name}</h3>
+      <p>${p.desc}</p>
+      <div class="price">${p.price}</div>
+    `;
+    div.appendChild(box);
+
+    // ADMIN
+    if (isAdmin) {
+      const adminBox = document.createElement("div");
+      adminBox.className = "product";
+      adminBox.innerHTML = `
+        <input value="${p.name}" onchange="editProduct(${i}, 'name', this.value)">
+        <textarea onchange="editProduct(${i}, 'desc', this.value)">${p.desc}</textarea>
+        <input value="${p.price}" onchange="editProduct(${i}, 'price', this.value)">
+        <button class="delete" onclick="deleteProduct(${i})">Remover</button>
+      `;
+      adminDiv.appendChild(adminBox);
+    }
+  });
+}
+
+function addProduct() {
+  const name = newName.value;
+  const desc = newDesc.value;
+  const price = newPrice.value;
+
+  if (!name || !desc || !price) {
+    alert("Preencha tudo!");
+    return;
+  }
+
+  const products = getProducts();
+  products.push({ name, desc, price });
+  saveProducts(products);
+
+  newName.value = "";
+  newDesc.value = "";
+  newPrice.value = "";
+
+  loadProducts();
+}
+
+function editProduct(index, field, value) {
+  const products = getProducts();
+  products[index][field] = value;
+  saveProducts(products);
+  loadProducts();
+}
+
+function deleteProduct(index) {
+  const products = getProducts();
+  products.splice(index, 1);
+  saveProducts(products);
+  loadProducts();
+}
+
+/* ===== AVALIAÇÕES ===== */
 function addReview() {
   const email = document.getElementById("email").value;
   const comment = document.getElementById("comment").value;
@@ -179,8 +251,8 @@ function addReview() {
   reviews.push({ email, comment });
   localStorage.setItem("reviews", JSON.stringify(reviews));
 
-  document.getElementById("email").value = "";
-  document.getElementById("comment").value = "";
+  email.value = "";
+  comment.value = "";
   loadReviews();
 }
 
@@ -208,6 +280,8 @@ function deleteReview(i) {
   loadReviews();
 }
 
+/* INIT */
+loadProducts();
 loadReviews();
 </script>
 
