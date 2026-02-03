@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Loja Blox Fruits</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin: 0;
@@ -11,29 +12,35 @@
       background: #0f172a;
       color: #e5e7eb;
     }
+
     header {
       background: linear-gradient(90deg, #7c3aed, #2563eb);
-      padding: 30px;
+      padding: 35px;
       text-align: center;
     }
+
     header h1 {
       margin: 0;
-      font-size: 32px;
+      font-size: 34px;
     }
+
     header p {
       margin-top: 10px;
       font-size: 16px;
     }
+
     .container {
-      padding: 30px;
       max-width: 1100px;
       margin: auto;
+      padding: 30px;
     }
+
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 20px;
     }
+
     .card {
       background: #020617;
       border-radius: 12px;
@@ -41,48 +48,74 @@
       border: 1px solid #1e293b;
       text-align: center;
     }
+
     .card h3 {
-      margin-top: 0;
       color: #a78bfa;
+      margin-top: 0;
     }
+
     .price {
       font-size: 22px;
-      margin: 15px 0;
-      color: #22c55e;
       font-weight: bold;
+      color: #22c55e;
+      margin: 15px 0;
     }
+
     .btn {
       display: inline-block;
-      padding: 12px 18px;
+      padding: 12px 20px;
       background: #22c55e;
       color: #000;
       border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
       transition: 0.2s;
+      cursor: pointer;
+      border: none;
     }
+
     .btn:hover {
       background: #16a34a;
     }
-    .about {
-      margin-top: 40px;
+
+    .box {
       background: #020617;
-      padding: 20px;
       border-radius: 12px;
+      padding: 25px;
       border: 1px solid #1e293b;
+      margin-top: 40px;
     }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      margin-bottom: 10px;
+      font-family: Arial;
+    }
+
+    .review {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
     footer {
+      background: #020617;
       text-align: center;
       padding: 20px;
-      background: #020617;
-      margin-top: 40px;
       font-size: 14px;
       color: #9ca3af;
+      margin-top: 40px;
     }
+
     .warning {
-      margin-top: 20px;
       font-size: 14px;
       color: #facc15;
+      margin-top: 15px;
     }
   </style>
 </head>
@@ -95,11 +128,12 @@
 
 <div class="container">
 
+  <!-- LOJA -->
   <div class="cards">
     <div class="card">
       <h3>Conta Iniciante Upada</h3>
-      <p>Level médio, pronta para farm</p>
-      <div class="price">R$ 15,00</div>
+      <p>Boa para começar e farmar</p>
+      <div class="price">R$ 25,00</div>
       <a class="btn" href="https://wa.me/5524998647157" target="_blank">
         Comprar no WhatsApp
       </a>
@@ -107,8 +141,8 @@
 
     <div class="card">
       <h3>Conta Avançada</h3>
-      <p>Level alto + progresso em ilhas</p>
-      <div class="price">R$ 20,00</div>
+      <p>Level alto + progresso</p>
+      <div class="price">R$ 45,00</div>
       <a class="btn" href="https://wa.me/5524998647157" target="_blank">
         Comprar no WhatsApp
       </a>
@@ -117,21 +151,22 @@
     <div class="card">
       <h3>Conta MAX Level</h3>
       <p>Level 2550 • Endgame</p>
-      <div class="price">R$ 25,00</div>
+      <div class="price">R$ 70,00</div>
       <a class="btn" href="https://wa.me/5524998647157" target="_blank">
         Comprar no WhatsApp
       </a>
     </div>
   </div>
 
-  <div class="about">
+  <!-- SOBRE -->
+  <div class="box">
     <h2>📌 Sobre</h2>
     <p>
-      Eu faço up de contas no jogo <strong>Blox Fruits</strong> e vendo contas já prontas
-      para quem não quer perder tempo farmando.
+      Faço up manual de contas no jogo <strong>Blox Fruits</strong> e vendo contas
+      prontas para quem não quer perder tempo farmando.
     </p>
     <p>
-      📲 Contato direto no WhatsApp: <strong>+55 24 99864-7157</strong>
+      📲 WhatsApp para contato: <strong>+55 24 99864-7157</strong>
     </p>
 
     <div class="warning">
@@ -140,11 +175,59 @@
     </div>
   </div>
 
+  <!-- AVALIAÇÕES -->
+  <div class="box">
+    <h2>⭐ Avaliações dos Clientes</h2>
+
+    <div id="reviews"></div>
+
+    <h3>Deixe sua avaliação</h3>
+    <input type="text" id="name" placeholder="Seu nome">
+    <textarea id="comment" placeholder="Seu comentário"></textarea>
+    <button class="btn" onclick="addReview()">Enviar Avaliação</button>
+  </div>
+
 </div>
 
 <footer>
   © 2026 • Loja Blox Fruits • Atendimento via WhatsApp
 </footer>
+
+<script>
+  const reviewsDiv = document.getElementById("reviews");
+
+  function loadReviews() {
+    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+    reviewsDiv.innerHTML = "";
+    reviews.forEach(r => {
+      const div = document.createElement("div");
+      div.className = "review";
+      div.innerHTML = `<strong>${r.name}</strong><br>⭐⭐⭐⭐⭐<br>${r.comment}`;
+      reviewsDiv.appendChild(div);
+    });
+  }
+
+  function addReview() {
+    const name = document.getElementById("name").value;
+    const comment = document.getElementById("comment").value;
+
+    if (!name || !comment) {
+      alert("Preencha nome e comentário!");
+      return;
+    }
+
+    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+    reviews.push({ name, comment });
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+
+    document.getElementById("name").value = "";
+    document.getElementById("comment").value = "";
+
+    loadReviews();
+  }
+
+  loadReviews();
+</script>
 
 </body>
 </html>
