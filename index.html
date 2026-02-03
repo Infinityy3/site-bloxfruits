@@ -2,240 +2,167 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Loja Blox Fruits</title>
+  <title>Infinity Blox Fruits</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <style>
     body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Arial, sans-serif;
       background: #0f172a;
-      color: #e5e7eb;
+      color: #fff;
+      margin: 0;
+      padding: 0;
     }
-
     header {
-      background: linear-gradient(90deg, #7c3aed, #2563eb);
-      padding: 35px;
+      background: #020617;
+      padding: 20px;
       text-align: center;
     }
-
-    header h1 {
-      margin: 0;
-      font-size: 34px;
-    }
-
-    .container {
-      max-width: 1100px;
+    section {
+      padding: 20px;
+      max-width: 900px;
       margin: auto;
-      padding: 30px;
     }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
     .card {
       background: #020617;
-      border-radius: 12px;
       padding: 20px;
-      border: 1px solid #1e293b;
-      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 20px;
     }
-
-    .card h3 {
-      color: #a78bfa;
-      margin-top: 0;
-    }
-
     .price {
       font-size: 22px;
-      font-weight: bold;
       color: #22c55e;
-      margin: 15px 0;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 20px;
-      background: #22c55e;
-      color: #000;
-      border-radius: 8px;
-      text-decoration: none;
       font-weight: bold;
-      cursor: pointer;
-      border: none;
-      transition: 0.2s;
     }
-
-    .btn:hover {
-      background: #16a34a;
-    }
-
-    .btn-delete {
-      background: #ef4444;
-      color: #fff;
-      margin-top: 10px;
-    }
-
-    .btn-delete:hover {
-      background: #dc2626;
-    }
-
-    .box {
-      background: #020617;
-      border-radius: 12px;
-      padding: 25px;
-      border: 1px solid #1e293b;
-      margin-top: 40px;
-    }
-
-    input, textarea {
+    button, input, textarea {
       width: 100%;
       padding: 10px;
-      border-radius: 6px;
+      margin-top: 10px;
+      border-radius: 5px;
       border: none;
-      margin-bottom: 10px;
-      font-family: Arial;
     }
-
-    .review {
-      background: #020617;
-      border: 1px solid #1e293b;
-      border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 10px;
+    button {
+      background: #22c55e;
+      cursor: pointer;
+      font-weight: bold;
     }
-
-    footer {
-      background: #020617;
+    .whatsapp {
+      background: #25d366;
       text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      color: #9ca3af;
-      margin-top: 40px;
+      margin-top: 20px;
     }
-
-    .warning {
-      font-size: 14px;
-      color: #facc15;
-      margin-top: 15px;
+    .comment {
+      background: #020617;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    .delete {
+      background: #ef4444;
+      margin-top: 5px;
+    }
+    .admin {
+      display: none;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>🔥 Loja Blox Fruits 🔥</h1>
-  <p>Upo contas de Blox Fruits e vendo contas prontas para jogar</p>
+  <h1>🔥 Infinity Blox Fruits</h1>
+  <p>Venda de contas upadas com segurança e preço justo</p>
 </header>
 
-<div class="container">
-
-  <!-- LOJA -->
-  <div class="cards">
-    <div class="card">
-      <h3>Conta Iniciante Upada</h3>
-      <p>Boa para começar e farmar</p>
-      <div class="price">R$ 25,00</div>
-      <a class="btn" href="https://wa.me/5524998647157" target="_blank">Comprar no WhatsApp</a>
-    </div>
-
-    <div class="card">
-      <h3>Conta Avançada</h3>
-      <p>Level alto + progresso</p>
-      <div class="price">R$ 45,00</div>
-      <a class="btn" href="https://wa.me/5524998647157" target="_blank">Comprar no WhatsApp</a>
-    </div>
-
-    <div class="card">
-      <h3>Conta MAX Level</h3>
-      <p>Level 2550 • Endgame</p>
-      <div class="price">R$ 70,00</div>
-      <a class="btn" href="https://wa.me/5524998647157" target="_blank">Comprar no WhatsApp</a>
-    </div>
-  </div>
-
-  <!-- SOBRE -->
-  <div class="box">
+<section>
+  <div class="card">
     <h2>📌 Sobre</h2>
-    <p>Faço up manual de contas no jogo <strong>Blox Fruits</strong> e vendo contas prontas.</p>
-    <p>📲 WhatsApp: <strong>+55 24 99864-7157</strong></p>
+    <p id="aboutText">
+      Aqui você encontra contas de Blox Fruits já upadas, ideais pra quem quer jogar sem perder tempo.
+      Todas as contas são entregues rapidamente após o pagamento.
+    </p>
+  </div>
 
-    <div class="warning">
-      ⚠️ A venda de contas pode violar os Termos do Roblox.
-      O comprador assume total responsabilidade.
+  <div class="card">
+    <h2>💎 Contas Disponíveis</h2>
+
+    <p><b>Conta Iniciante</b></p>
+    <p>Level baixo, ideal pra começar</p>
+    <div class="price">R$ 15,00</div>
+
+    <hr>
+
+    <p><b>Conta Avançada</b></p>
+    <p>Boa para PvP e farm</p>
+    <div class="price">R$ 20,00</div>
+
+    <hr>
+
+    <p><b>Conta MAX (Level 2550)</b></p>
+    <p>Conta completa, pronta pra tudo</p>
+    <div class="price">R$ 25,00</div>
+  </div>
+
+  <button class="whatsapp" onclick="window.open('https://wa.me/5524998647157')">
+    📲 Comprar pelo WhatsApp
+  </button>
+</section>
+
+<section>
+  <div class="card">
+    <h2>⭐ Avaliações</h2>
+
+    <input id="name" placeholder="Seu nome">
+    <textarea id="comment" placeholder="Seu comentário"></textarea>
+    <button onclick="addComment()">Enviar Avaliação</button>
+
+    <div id="comments"></div>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <h2>🔒 Área Administrativa</h2>
+    <input id="adminPass" type="password" placeholder="Senha de admin">
+    <button onclick="loginAdmin()">Entrar</button>
+
+    <div class="admin" id="adminPanel">
+      <textarea id="editAbout"></textarea>
+      <button onclick="saveAbout()">Salvar Texto</button>
     </div>
   </div>
-
-  <!-- AVALIAÇÕES -->
-  <div class="box">
-    <h2>⭐ Avaliações dos Clientes</h2>
-
-    <div id="reviews"></div>
-
-    <h3>Deixe sua avaliação</h3>
-    <input type="text" id="name" placeholder="Seu nome">
-    <textarea id="comment" placeholder="Seu comentário"></textarea>
-    <button class="btn" onclick="addReview()">Enviar Avaliação</button>
-  </div>
-
-</div>
-
-<footer>
-  © 2026 • Loja Blox Fruits • Atendimento via WhatsApp
-</footer>
+</section>
 
 <script>
-  const reviewsDiv = document.getElementById("reviews");
+  function addComment() {
+    const name = document.getElementById('name').value;
+    const text = document.getElementById('comment').value;
+    if (!name || !text) return;
 
-  function loadReviews() {
-    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-    reviewsDiv.innerHTML = "";
+    const div = document.createElement('div');
+    div.className = 'comment';
+    div.innerHTML = `<b>${name}</b><p>${text}</p>
+      <button class="delete" onclick="this.parentElement.remove()">Apagar</button>`;
+    document.getElementById('comments').appendChild(div);
 
-    reviews.forEach((r, index) => {
-      const div = document.createElement("div");
-      div.className = "review";
-      div.innerHTML = `
-        <strong>${r.name}</strong><br>
-        ⭐⭐⭐⭐⭐<br>
-        ${r.comment}<br>
-        <button class="btn btn-delete" onclick="deleteReview(${index})">
-          Apagar comentário
-        </button>
-      `;
-      reviewsDiv.appendChild(div);
-    });
+    document.getElementById('name').value = '';
+    document.getElementById('comment').value = '';
   }
 
-  function addReview() {
-    const name = document.getElementById("name").value;
-    const comment = document.getElementById("comment").value;
-
-    if (!name || !comment) {
-      alert("Preencha nome e comentário!");
-      return;
+  function loginAdmin() {
+    const pass = document.getElementById('adminPass').value;
+    if (pass === '1234') {
+      document.getElementById('adminPanel').style.display = 'block';
+      document.getElementById('editAbout').value =
+        document.getElementById('aboutText').innerText;
+    } else {
+      alert('Senha incorreta');
     }
-
-    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-    reviews.push({ name, comment });
-    localStorage.setItem("reviews", JSON.stringify(reviews));
-
-    document.getElementById("name").value = "";
-    document.getElementById("comment").value = "";
-
-    loadReviews();
   }
 
-  function deleteReview(index) {
-    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-    reviews.splice(index, 1);
-    localStorage.setItem("reviews", JSON.stringify(reviews));
-    loadReviews();
+  function saveAbout() {
+    document.getElementById('aboutText').innerText =
+      document.getElementById('editAbout').value;
+    alert('Texto atualizado!');
   }
-
-  loadReviews();
 </script>
 
 </body>
