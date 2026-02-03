@@ -10,7 +10,6 @@
       background: #0f172a;
       color: #fff;
       margin: 0;
-      padding: 0;
     }
     header {
       background: #020617;
@@ -45,23 +44,12 @@
       cursor: pointer;
       font-weight: bold;
     }
-    .whatsapp {
-      background: #25d366;
-      text-align: center;
-      margin-top: 20px;
-    }
-    .comment {
-      background: #020617;
-      padding: 10px;
-      border-radius: 5px;
-      margin-top: 10px;
-    }
     .delete {
       background: #ef4444;
-      margin-top: 5px;
     }
     .admin {
       display: none;
+      margin-top: 15px;
     }
   </style>
 </head>
@@ -77,7 +65,6 @@
     <h2>📌 Sobre</h2>
     <p id="aboutText">
       Aqui você encontra contas de Blox Fruits já upadas, ideais pra quem quer jogar sem perder tempo.
-      Todas as contas são entregues rapidamente após o pagamento.
     </p>
   </div>
 
@@ -85,23 +72,20 @@
     <h2>💎 Contas Disponíveis</h2>
 
     <p><b>Conta Iniciante</b></p>
-    <p>Level baixo, ideal pra começar</p>
-    <div class="price">R$ 15,00</div>
+    <div class="price" id="price1">R$ 15,00</div>
 
     <hr>
 
     <p><b>Conta Avançada</b></p>
-    <p>Boa para PvP e farm</p>
-    <div class="price">R$ 20,00</div>
+    <div class="price" id="price2">R$ 20,00</div>
 
     <hr>
 
     <p><b>Conta MAX (Level 2550)</b></p>
-    <p>Conta completa, pronta pra tudo</p>
-    <div class="price">R$ 25,00</div>
+    <div class="price" id="price3">R$ 25,00</div>
   </div>
 
-  <button class="whatsapp" onclick="window.open('https://wa.me/5524998647157')">
+  <button onclick="window.open('https://wa.me/5524998647157')">
     📲 Comprar pelo WhatsApp
   </button>
 </section>
@@ -109,11 +93,9 @@
 <section>
   <div class="card">
     <h2>⭐ Avaliações</h2>
-
     <input id="name" placeholder="Seu nome">
     <textarea id="comment" placeholder="Seu comentário"></textarea>
     <button onclick="addComment()">Enviar Avaliação</button>
-
     <div id="comments"></div>
   </div>
 </section>
@@ -121,12 +103,19 @@
 <section>
   <div class="card">
     <h2>🔒 Área Administrativa</h2>
-    <input id="adminPass" type="password" placeholder="Senha de admin">
+    <input type="password" id="adminPass" placeholder="Senha de admin">
     <button onclick="loginAdmin()">Entrar</button>
 
     <div class="admin" id="adminPanel">
+      <h3>✏️ Editar Texto</h3>
       <textarea id="editAbout"></textarea>
       <button onclick="saveAbout()">Salvar Texto</button>
+
+      <h3>💰 Editar Preços</h3>
+      <input id="editPrice1" placeholder="Preço Conta Iniciante">
+      <input id="editPrice2" placeholder="Preço Conta Avançada">
+      <input id="editPrice3" placeholder="Preço Conta MAX">
+      <button onclick="savePrices()">Salvar Preços</button>
     </div>
   </div>
 </section>
@@ -138,7 +127,7 @@
     if (!name || !text) return;
 
     const div = document.createElement('div');
-    div.className = 'comment';
+    div.className = 'card';
     div.innerHTML = `<b>${name}</b><p>${text}</p>
       <button class="delete" onclick="this.parentElement.remove()">Apagar</button>`;
     document.getElementById('comments').appendChild(div);
@@ -148,11 +137,18 @@
   }
 
   function loginAdmin() {
-    const pass = document.getElementById('adminPass').value;
-    if (pass === '@@24loveyou@@') {
+    if (document.getElementById('adminPass').value === '@@24loveyou@@') {
       document.getElementById('adminPanel').style.display = 'block';
+
       document.getElementById('editAbout').value =
         document.getElementById('aboutText').innerText;
+
+      document.getElementById('editPrice1').value =
+        document.getElementById('price1').innerText;
+      document.getElementById('editPrice2').value =
+        document.getElementById('price2').innerText;
+      document.getElementById('editPrice3').value =
+        document.getElementById('price3').innerText;
     } else {
       alert('Senha incorreta');
     }
@@ -162,6 +158,16 @@
     document.getElementById('aboutText').innerText =
       document.getElementById('editAbout').value;
     alert('Texto atualizado!');
+  }
+
+  function savePrices() {
+    document.getElementById('price1').innerText =
+      document.getElementById('editPrice1').value;
+    document.getElementById('price2').innerText =
+      document.getElementById('editPrice2').value;
+    document.getElementById('price3').innerText =
+      document.getElementById('editPrice3').value;
+    alert('Preços atualizados!');
   }
 </script>
 
